@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import numpy.random as npr
 
-from prepare_data.utils import IoU
+from utils import IoU
 
 anno_file = "wider_face_train.txt"
 im_dir = "../../DATA/WIDER_train/images"
@@ -44,6 +44,9 @@ for annotation in annotations:
     boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
     #load image
     img = cv2.imread(os.path.join(im_dir, im_path + '.jpg'))
+    if img is None:
+        print( 'not found', im_dir, im_path )
+        continue
     idx += 1
     #if idx % 100 == 0:
         #print(idx, "images done")
